@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+
+<div class="container my-5">
+    <!-- Título de la página -->
+    <h2 class="text-center mb-4">Listado de Ventas</h2>
+
+    <!-- Tabla de compras -->
+    <div class="table-responsive">
+        <table class="table table-striped table-bordered table-hover shadow-lg">
+            <thead class="table-dark">
+                <tr>
+                    <th scope="col">ID de Venta</th>
+                    <th scope="col">Producto</th>
+                    <th scope="col">Cantidad</th>
+                    <th scope="col">Precio</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for item in lista %}
+                <tr>
+                    <th scope="row">{{ item.id }}</th>
+                    <td>{{ item.producto.producto_nombre }}</td>
+                    <td>{{ item.cantidad }}</td>
+                    <td>${{ item.producto.producto_precio }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+
+{% endblock content %}

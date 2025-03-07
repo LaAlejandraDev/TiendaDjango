@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+<div class="container mt-4">
+    <h1 class="h1 text-center fw-bold text-dark">Editar Producto</h1>
+
+    <div class="d-flex justify-content-center pt-3">
+        <form method="post" class="p-4 border rounded shadow bg-white" enctype="multipart/form-data" style="max-width: 750px; width: 100%;">
+            {% csrf_token %}
+            <div class="mb-3 fw-bold">
+                {{ form.as_p }}
+            </div>
+            <div class="text-center">
+                <button type="submit" class="btn btn-gradient px-4 py-2 rounded-pill shadow-sm btn-danger">
+                    Editar Producto
+                </button>
+            </div>
+        </form>  
+    </div>
+</div>
+{% endblock content %}

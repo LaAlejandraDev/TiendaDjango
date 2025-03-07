@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+  {% if form.errors %}
+    <div class="alert alert-danger" role="alert">
+      Las credenciales son incorrectas.
+    </div>
+  {% endif %}
+
+  {% if next %}
+    {% if user.is_authenticated %}
+      <div class="alert alert-warning" role="alert">
+        Your account doesn't have access to this page. To proceed,
+        please login with an account that has access.
+      </div>
+    {% else %}
+      <div class="alert alert-info" role="alert">
+        Please login to see this page.
+      </div>
+    {% endif %}
+  {% endif %}
+
+  <!-- Formulario centrado -->
+  <div class="d-flex justify-content-center align-items-center" style="min-height: 50vh;">
+    <form method="post" action="{% url 'login' %}" class="p-5 shadow rounded bg-light w-25">
+      <div class="text-center mb-4">
+        <h2>Iniciar sesión</h2>
+      </div>
+      {% csrf_token %}
+      <table>
+        <tr>
+          <td>{{ form.username.label_tag }}</td>
+          <td>{{ form.username }}</td>
+        </tr>
+        <tr>
+          <td>{{ form.password.label_tag }}</td>
+          <td>{{ form.password }}</td>
+        </tr>
+      </table>
+      <div class="d-flex justify-content-center mt-4">
+  <input type="submit" value="Iniciar sesión" class="btn btn-primary w-100">
+</div>
+<input type="hidden" name="next" value="{{ next }}">
+
+<div class="d-flex justify-content-center mt-3">
+  <a href="{% url 'password_reset' %}" class="text-decoration-none">Lost password?</a>
+</div>
+
+    </form>
+  </div>
+
+{% endblock %}

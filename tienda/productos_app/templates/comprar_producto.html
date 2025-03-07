@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container d-flex justify-content-center py-4">
+    
+    <div class="card shadow-lg border-0 p-3" style="max-width: 400px; background-color: #ffe6f2;">
+        <img src="{{ producto.producto_imagen.url }}" alt="{{ producto.producto_nombre }}" 
+             class="card-img-top img-fluid" style="height: 300px; object-fit: cover;">
+        
+        <div class="card-body text-center">
+            <h4 class="card-title text-dark fw-bold">{{ producto.producto_nombre }}</h4>
+            <p class="text-secondary">Precio: <span class=" fw-bold">${{ producto.producto_precio }}</span></p>
+            
+            <form method="post" class="mt-3">
+                {% csrf_token %}
+                <div class="mb-3">{{ form.as_p }}</div>
+                <button type="submit" class="btn text-white btn-lg w-100 fw-bold" style="background-color: #c2185b; border-color: #c2185b;">
+                    Comprar
+                </button>
+            </form>
+
+            <a href="{% url 'catalogo_productos' %}" class="btn btn-outline-dark mt-3 w-100" style="border-color: #c2185b; color: #c2185b;">Volver</a>
+        </div>
+    </div>
+</div>
+{% endblock %}

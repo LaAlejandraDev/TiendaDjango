@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+    <div class="container w-75 py-4">
+        <h1 class="text-center fw-bold py-3" style="color: #c2185b;">
+            Catálogo de Productos
+        </h1>
+        
+        <div class="row g-4">
+            {% for item in lista %}
+            <div class="col-md-3 d-flex align-items-stretch">
+                <div class="card shadow-lg border-0 h-100 d-flex flex-column" style="background-color: #ffe6f2;">
+                    <div class="overflow-hidden" style="min-height: 250px; background-color: #d63384;">
+                        {% if item.producto_imagen.url %}
+                        <img class="img-fluid w-100 h-100 object-fit-cover" src="{{ item.producto_imagen.url }}" alt="{{ item.producto_nombre }}">
+                        {% else %}
+                        <img class="img-fluid w-100 h-100 object-fit-cover" src="{% static 'image/django.png' %}" alt="Imagen por defecto">
+                        {% endif %}
+                    </div>
+                    <div class="card-body text-center d-flex flex-column justify-content-between">
+                        <div>
+                            <h5 class="card-title text-dark fw-bold">{{ item.producto_nombre }}</h5>
+                            <p class="mb-2" style="color: #c2185b;">Precio: <span class="fw-bold">${{ item.producto_precio }}</span></p>
+                        </div>
+                        <a href="{% url 'comprar_productos' item.id %}" class="btn text-white mt-3 w-100 fw-bold" style="background-color: #c2185b; border-color: #c2185b;">
+                            Comprar
+                        </a>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock content %}
